@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
-            create: (context) =>
-                context.read<AuthenticationService>().authStateChanges)
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChanges,
+        )
       ],
       child: MaterialApp(
         title: 'product tracker',

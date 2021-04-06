@@ -14,7 +14,7 @@ class _SettingsState extends State<Settings> {
       body: Center(
         child: Column(
           children: [
-            Text('build')
+            Text('build',style: TextStyle(color:Colors.cyan),)
             //  Switch(value: null, onChanged: null)
           ],
         ),
