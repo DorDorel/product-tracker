@@ -22,16 +22,20 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider(
           create: (context) => db.streamTodayActivated(),
+          initialData: null,
         ),
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
           create: (context) =>
-              context.read<AuthenticationService>().authStateChanges,
+              Provider.of<AuthenticationService>(context, listen: false)
+                  .authStateChanges,
+          initialData: null,
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'product tracker',
         theme: ThemeData(
           brightness: Brightness.dark,
@@ -45,8 +49,7 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
-
+    final firebaseUser = Provider.of<User>(context);
     if (firebaseUser != null) {
       return HomePage();
     }
